@@ -15,9 +15,9 @@ from rules import RuleAgent, length_constraint, hit_technique
 
 from monte_carlo_search import monte_carlo_probability_map_parallel
 
-MCMC_TRAIN_SAMPLES = 256   
-MCMC_EVAL_SAMPLES  = 2048 
-MCMC_EVERY         = 4   
+MCMC_TRAIN_SAMPLES = 96   
+MCMC_EVAL_SAMPLES  = 384 
+MCMC_EVERY         = 12  
 MCMC_CORES = int(os.getenv("MCMC_CORES", "15"))
 MCMC_CORES = max(1, min(MCMC_CORES, multiprocessing.cpu_count()))
 
