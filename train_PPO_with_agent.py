@@ -15,10 +15,10 @@ from rules import RuleAgent, length_constraint, hit_technique
 
 from monte_carlo_search import monte_carlo_probability_map_parallel
 
-MCMC_TRAIN_SAMPLES = 512   
+MCMC_TRAIN_SAMPLES = 256   
 MCMC_EVAL_SAMPLES  = 2048 
-MCMC_EVERY         = 25   
-MCMC_CORES = int(os.getenv("MCMC_CORES", "2"))
+MCMC_EVERY         = 4   
+MCMC_CORES = int(os.getenv("MCMC_CORES", "15"))
 MCMC_CORES = max(1, min(MCMC_CORES, multiprocessing.cpu_count()))
 
 torch.set_num_threads(1)
@@ -109,7 +109,7 @@ def compute_gae(rews, dones, vals, next_v, gamma=0.99, lam=0.95, device="cpu"):
     return adv, ret
 
 # ---------------- PPO Train ----------------
-def train(total_steps=20000, horizon=4096, lr=3e-4, device="cpu",
+def train(total_steps=100000, horizon=4096, lr=3e-4, device="cpu",
           seed=42, board_size=10, max_steps=100, save_path="ppo_battleship_torch.pt", mcmc_on=True,
           mcmc_train_samples=MCMC_TRAIN_SAMPLES, mcmc_every=MCMC_EVERY, mcmc_cores=MCMC_CORES ):
     torch.manual_seed(seed); np.random.seed(seed)
